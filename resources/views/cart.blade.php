@@ -18,7 +18,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @if(empty($orders))
+                    @if($orders->price_total<=0)
                     <tr>
                         <td>No Products in cart</td>
                     </tr>
@@ -80,7 +80,7 @@
         </div>
     </div>
 </div>
-@if(empty($products))
+@if(empty($orders))
 @else
 
 <!-- Modal Products-->

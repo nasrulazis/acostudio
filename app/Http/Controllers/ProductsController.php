@@ -69,6 +69,7 @@ class ProductsController extends Controller
         $Products->status = 1;
         $Products->user_id = Auth::user()->id;
         $Products->save();
+        alert()->success('Success','Berhasil Menambah Product');
         if(Auth::user()->role==2){
             return redirect()->route('products.index');
         }else{
@@ -82,10 +83,13 @@ class ProductsController extends Controller
         $Products = Products::where('id',$id)->first();
         if($Products->status==2){
             $Products->status = 1;
+            $Products->save();
+            alert()->success('Success','Berhasil Hapus Verifikasi Product');
         }else{
             $Products->status = 2;
+            $Products->save();
+            alert()->success('Success','Berhasil Verifikasi Product');
         }
-        $Products->save();
         return back();
     }
     /**
@@ -133,6 +137,7 @@ class ProductsController extends Controller
         $Products->price = $request->price;
         $Products->description = $request->description;
         $Products->save();
+        alert()->success('Success','Berhasil Mengubah Produk');
         if(Auth::user()->role==2){
             return redirect()->route('products.index');
         }else{
@@ -155,6 +160,7 @@ class ProductsController extends Controller
         $id=$_GET['id'];
         $products = Products::find($id);
         $products->delete();
+        alert()->success('Success','Berhasil Menghapus Produk');
         return back();
     }
 }

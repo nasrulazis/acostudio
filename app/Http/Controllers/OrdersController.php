@@ -7,6 +7,7 @@ use App\Orders;
 use App\Order_Details;
 use App\Products;
 use App\Transactions;
+use RealRashid\SweetAlert\Facades\Alert;
 use Auth;
 use DateTime;
 
@@ -101,6 +102,7 @@ class OrdersController extends Controller
             $transaction->status = 0;
             $transaction->save();
         }
+        alert()->success('Success','Orders Berhasil Diselesaikan!');
         return redirect()->route('payments.index');
     }
     public function orders(Request $request){
@@ -147,6 +149,7 @@ class OrdersController extends Controller
             $orders->price_total +=$data->price; 
         }       
         $orders->update();
+        alert()->success('Success','Berhasil Menambahkan Ke Keranjang!');
         return back();
     }
     //checkout
@@ -158,6 +161,7 @@ class OrdersController extends Controller
         $orders->update();
         $orders->date = $orders->updated_at;
         $orders->update();
+        alert()->success('Success','Berhasil CheckOut Silahkan Melakukan Pembayaran!');
         return back();
     }
     // Delete From Orders 
@@ -173,6 +177,8 @@ class OrdersController extends Controller
             $orders->price_total +=$data->price; 
         }       
         $orders->update();
+        alert()->success('Success','Berhasil Menghapus Data');
+
         return back();
     }
     /**

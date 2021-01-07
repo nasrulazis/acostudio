@@ -87,6 +87,7 @@ class PaymentsController extends Controller
             $location=public_path('/storage/images');
             $file->move($location,$filename);
             $orders->image=$filename;                       
+            alert()->success('Success','Berhasil Mengupload Bukti Pembayaran');
         }
         $orders->update();
         return back();
@@ -106,6 +107,7 @@ class PaymentsController extends Controller
             $transaction->status = 0;
             $transaction->save();
         }
+        alert()->success('Success','Berhasil Verifikasi Pembayaran');
         return redirect()->route('payments.admin');
     }
 
